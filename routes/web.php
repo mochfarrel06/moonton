@@ -16,6 +16,14 @@ use Inertia\Inertia;
 |
 */
 
+Route::get('admin', function () {
+    return "Hello admin";
+})->middleware('role:admin');
+
+Route::get('user', function () {
+    return "Hello user";
+})->middleware('role:user');
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -35,4 +43,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
